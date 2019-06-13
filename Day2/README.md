@@ -1,3 +1,3 @@
 # compiler
 
-Please Check "run.bat"
+Please Click "run.bat"
