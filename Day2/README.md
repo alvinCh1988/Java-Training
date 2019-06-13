@@ -2,6 +2,7 @@
 
 Please Click "run.bat"
 
+or
 --------------------------
 cmd -> cd Training1\Day2
 
