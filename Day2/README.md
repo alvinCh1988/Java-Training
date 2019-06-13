@@ -1,5 +1,7 @@
-# Day2
+# open
 
-cd \bin
+cd C:\Users\user\Desktop\Training1\Day2\src
+
+javac work.java
 
 java work
