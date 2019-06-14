@@ -5,7 +5,7 @@ public class work {
 	
 	public static void main(String args[]) {
 		
-		System.out.println("Please enter the number¡@ex:1,3,5,7,9");
+		System.out.println("Please enter the number @ex:1,3,5,7,9");
 		Scanner sc = new Scanner(System.in);
 		work w = new work();
 		
@@ -18,7 +18,7 @@ public class work {
 			String ch = num.substring(i, i+1);
 			
 			if(ch.matches("[^a-zA-Z_0-9,]")) {
-				System.out.println("Number interval  Please enter\",\"¡C");
+				System.out.println("Number interval  Please enter\",\" ");
 				check = false;
 				break;
 			} 
