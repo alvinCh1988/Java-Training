@@ -19,4 +19,4 @@ Click run.bat
 
 It will read the data in 'source-file.txt' to calculate the result.
 
-You can change the value of 'value-list=' in source-file.txt.
+And you can change the value of 'value-list =' in source-file.txt.
