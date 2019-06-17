@@ -1,0 +1,2 @@
+value-list=10,100,78,101,44,55,66
+method=Merge
