@@ -1,6 +1,7 @@
-# compiler
+Before compiling, you need to create a Maven project.
+--
 
-open cmd and cd to the current project directory And enter the following instructions in order
+open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project
 
 mvn package
 
