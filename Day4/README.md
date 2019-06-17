@@ -7,7 +7,8 @@ Before compiling, you need to create a Maven project.
 ### open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project ###
     mvn package
  
-### cd target  And type ###
+### When BUILD SUCCESS And type ###
+    cd target
     java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt
 
 
