@@ -12,7 +12,12 @@ public class SortFactoryDemo {
 	Map<String, String> readVal = null;
 	
 	
-	String path = "../source-file.txt";
+	String path = "";
+		
+	if(args[0] != null) {
+	   path = args[0];
+	}
+	
 	
 	readVal = rsf.readFile(path);
 	
