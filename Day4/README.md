@@ -8,7 +8,7 @@ cd target  And type
 
 java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
 
-Make sure the 'source-file.txt' file is in the target folder before entering it.
+Make sure the 'source-file.txt' file is in the Day4 folder before entering it.
 --
 
 It will read the data in 'source-file.txt' to calculate the result.
