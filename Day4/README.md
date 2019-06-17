@@ -4,7 +4,7 @@ open cmd and cd to the current project directory And enter the following instruc
 
 mvn package
 
-and cd target  And type 
+cd target  And type
 
 java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
 
