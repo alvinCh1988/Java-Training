@@ -15,11 +15,7 @@ public class ReadSourceFile {
 		      String line;
 		      while ((line = br.readLine()) != null) {
 		        sBuild.append(line);
-		        
-		        
-		        	
-		        
-			         
+     
 		        }
 		      }
 		    catch (IOException e) {
@@ -38,11 +34,7 @@ public class ReadSourceFile {
         	map.put("value-list", valList[1]);
 
         }
-		
-
 		return map;
 	}
-
-
 
 }
