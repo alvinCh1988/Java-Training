@@ -1,9 +1,15 @@
 # compiler
 
-<br>
+open cmd and cd to the current project directory And enter the following instructions in order
 
-<h3>Make sure the 'source-file.txt' file is in your "Day4" folder..</h3>
+mvn package
 
+and cd target  And type 
+
+java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
+
+Make sure the 'source-file.txt' file is in the target folder before entering it.
+--
 
 It will read the data in 'source-file.txt' to calculate the result.
 
