@@ -3,11 +3,11 @@ Before compiling, you need to create a Maven project.
 
 open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project
 
-mvn package
+  mvn package
 
 cd target  And type
 
-java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
+  java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
 
 Make sure the 'source-file.txt' file is in the Day4 folder before entering it.
 --
