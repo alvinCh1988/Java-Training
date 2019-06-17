@@ -11,12 +11,12 @@ cd target  And type
   java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt
   --
 
-It will read the data in 'source-file.txt' to calculate the result.
+
 
 You can change the "method" status in source-file.txt
---
 
 Ex: merge or bubble
+--
 
 And you can change the value of 'value-list =' in source-file.txt.
---
+
