@@ -2,9 +2,7 @@ package idv.Day4;
 
 public class MergeSort implements Sort_interface{
 
-static {
-	MergeSort mSort = new MergeSort();
-}
+
 	
 	@Override
 	public void sort(int[] valueList) {

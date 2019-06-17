@@ -4,6 +4,4 @@ public interface Sort_interface {
 	
 	public void sort(int[] valueList);
 	
-	
-
 }

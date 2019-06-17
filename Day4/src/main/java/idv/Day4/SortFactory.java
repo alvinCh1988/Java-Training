@@ -8,6 +8,7 @@ public class SortFactory {
 		if(sortType == null){
 	         return null;
 	      }		
+		
 	      if(sortType.equalsIgnoreCase("Bubble")){
 	         return new BubbleSort();
 	         
@@ -15,8 +16,9 @@ public class SortFactory {
 	         return new MergeSort();
 	         
 	      }
-		
+	      
 		return null;
+
 	}
 
 }
