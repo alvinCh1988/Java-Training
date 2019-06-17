@@ -1,15 +1,11 @@
 Before compiling, you need to create a Maven project.
 --
 
-open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project
-
-  <h2>mvn package</h2>
+### open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project ###
+mvn package
  
-
-cd target  And type
-
-  <h2>java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt</h2>
-
+### cd target  And type ###
+java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo `C:\source-file.txt
 
 
 
