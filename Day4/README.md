@@ -4,16 +4,14 @@ Before compiling, you need to create a Maven project.
 open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project
 
   mvn package
+  --
 
 cd target  And type
 
-  java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo
-
-Make sure the 'source-file.txt' file is in the Day4 folder before entering it.
---
+  java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt
+  --
 
 It will read the data in 'source-file.txt' to calculate the result.
-
 
 You can change the "method" status in source-file.txt
 --
