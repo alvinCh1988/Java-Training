@@ -4,7 +4,7 @@ MergeSort & Bubble Sort
 You need to have Maven and Java installed.
 Before compiling, you need to create a Maven project.
 
-### open cmd and cd to the current project directory And enter the following instructions in order to build Maven Project ###
+### open cmd and cd to the current project directory and enter the following instructions in order to build Maven Project ###
     mvn package
  
 ### When BUILD SUCCESS And type ###
