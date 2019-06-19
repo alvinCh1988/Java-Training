@@ -14,11 +14,12 @@ Data Access Object(DAO) pattern Example & JDBC
 --
 
 ### 請於您的MySQL 新增一個 Table ###
-    CREATE TABLE `test1`.`new_table` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(45) NULL,
-    `gender` VARCHAR(45) NULL,
-    PRIMARY KEY (`id`));
+    CREATE TABLE `test`.`new_table` (
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `name` VARCHAR(45) NULL,
+        `gender` VARCHAR(45) NULL,
+        PRIMARY KEY (`id`)
+        );
     
 ### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classath
 
