@@ -30,7 +30,7 @@ Data Access Object(DAO) pattern Example & JDBC
  
 ### BUILD SUCCESS 之後,依序下列指令開啟專案 ###
     cd target
-    java -cp .\ idv.Day5.EmpDaoPattemDemo C:\source-file.txt
+    java -cp .\* idv.Day5.EmpDaoPattemDemo C:\source-file.txt
 
 ### 您可以對 `source-file.txt` 內容進行修改 (以下為範例) ###
 
