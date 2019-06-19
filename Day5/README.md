@@ -26,7 +26,7 @@ Data Access Object(DAO) pattern Example & JDBC
 ### 在Day5專案 目錄中開啟 cmd 並輸入以下指令建立專案 ###
     mvn package
     
-### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至 Day5/target中
+### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至 Day5/target中 (也可以放置您自定義的 lib 資料夾,在指令添加你放置jar檔的檔案路徑)
  
 ### BUILD SUCCESS 之後,依序下列指令開啟專案 ###
     cd target
