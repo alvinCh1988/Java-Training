@@ -10,7 +10,7 @@ Data Access Object(DAO) pattern Example & JDBC
 • mysql-connector: 8.0.13
 
 
-程式開啟前提醒:
+程式開啟前準備:
 --
 
 ### 請於您的MySQL 新增一個 Table ###
