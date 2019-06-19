@@ -18,7 +18,7 @@ Data Access Object(DAO) pattern Example & JDBC
     java -cp Day5-0.0.1-SNAPSHOT.jar idv.Day5.EmpDaoPattemDemo C:\source-file.txt
 
 程式開啟前注意:
-請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的Classath
+請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classath
 
 確保您的 `source-file.txt` 路徑正確
     
