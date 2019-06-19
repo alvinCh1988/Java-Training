@@ -8,32 +8,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+public class EmpDAO implements EmpDAO_interface {
 
-public class EmpDAO implements EmpDAO_interface{
-	
-	String driver = "com.mysql.jdbc.Driver";
-	String url = "";
-	String userId = "";
-	String passwd = "";
-	
-	private static final String INSERT_STMT = 
-			"INSERT INTO test1.emp(name, gender) VALUE (?, ?) ";
-	private static final String UPDATE = 
-			"UPDATE test1.emp SET name=?, gender=? WHERE (id=?)";
-	private static final String DELETE = 
-			"DELETE FROM test1.emp WHERE (id =?)";
-	private static final String GET_ALL_STMT = 
-			"SELECT * FROM test1.emp";
-	private static final String GET_ONE_STMT = 
-			"SELECT * FROM test1.emp where (id=?)";
-	
-	
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = null;
+	String userId = null;
+	String passwd = null;
+
+	private static final String INSERT_STMT = "INSERT INTO test1.emp(name, gender) VALUE (?, ?) ";
+	private static final String UPDATE = "UPDATE test1.emp SET name=?, gender=? WHERE (id=?)";
+	private static final String DELETE = "DELETE FROM test1.emp WHERE (id =?)";
+	private static final String GET_ALL_STMT = "SELECT * FROM test1.emp";
+	private static final String GET_ONE_STMT = "SELECT * FROM test1.emp where (id=?)";
+
 	public void settingDB(String url, String userId, String passwd) {
-		
+
 		this.url = url;
 		this.userId = userId;
 		this.passwd = passwd;
-		
+
 	}
 
 	public void insert(EmpVO empVO) {
@@ -42,7 +35,7 @@ public class EmpDAO implements EmpDAO_interface{
 
 		try {
 
-			Class.forName(driver);
+//			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
@@ -51,13 +44,8 @@ public class EmpDAO implements EmpDAO_interface{
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
 			if (pstmt != null) {
@@ -75,7 +63,7 @@ public class EmpDAO implements EmpDAO_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	public void update(EmpVO empVO) {
@@ -84,7 +72,7 @@ public class EmpDAO implements EmpDAO_interface{
 
 		try {
 
-			Class.forName(driver);
+//			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
@@ -92,16 +80,10 @@ public class EmpDAO implements EmpDAO_interface{
 			pstmt.setString(2, empVO.getGender());
 			pstmt.setInt(3, empVO.getId());
 
-
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
 			if (pstmt != null) {
@@ -119,8 +101,6 @@ public class EmpDAO implements EmpDAO_interface{
 				}
 			}
 		}
-
-		
 	}
 
 	public void delete(int id) {
@@ -129,7 +109,7 @@ public class EmpDAO implements EmpDAO_interface{
 
 		try {
 
-			Class.forName(driver);
+//			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
@@ -137,13 +117,8 @@ public class EmpDAO implements EmpDAO_interface{
 
 			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
 			if (pstmt != null) {
@@ -161,7 +136,7 @@ public class EmpDAO implements EmpDAO_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	public EmpVO findByPrimaryKey(int id) {
@@ -172,7 +147,7 @@ public class EmpDAO implements EmpDAO_interface{
 
 		try {
 
-			Class.forName(driver);
+//			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
@@ -185,15 +160,11 @@ public class EmpDAO implements EmpDAO_interface{
 				empVO.setId(rs.getInt("id"));
 				empVO.setName(rs.getString("name"));
 				empVO.setGender(rs.getString("gender"));
-				
+
 			}
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
 			if (rs != null) {
@@ -224,13 +195,13 @@ public class EmpDAO implements EmpDAO_interface{
 	public List<EmpVO> getAll() {
 		List<EmpVO> list = new ArrayList<EmpVO>();
 		EmpVO empVO = null;
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 
-			Class.forName(driver);
+//			Class.forName(driver);
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -240,16 +211,12 @@ public class EmpDAO implements EmpDAO_interface{
 				empVO.setId(rs.getInt("id"));
 				empVO.setName(rs.getString("name"));
 				empVO.setGender(rs.getString("gender"));
-				
-				list.add(empVO); // Store the row in the list
+
+				list.add(empVO);
 			}
 
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."
-					+ e.getMessage());
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured."
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured." + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -275,7 +242,5 @@ public class EmpDAO implements EmpDAO_interface{
 		}
 		return list;
 	}
-	
+
 }
-
-

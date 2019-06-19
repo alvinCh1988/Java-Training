@@ -1,0 +1,11 @@
+#Information of DataBase Connection
+Connection.String=${請填入DataBaseConnection字串}
+DB.User=${請填入DB使用者名稱}
+DB.Password=${請填入DB連線密碼}
+
+#DataBase Operateion
+DB.Action=C/R/U/D
+DB.C.Data=name,gender
+DB.R.ID=id
+DB.U.Data=id,ma,e,gemder
+DB.D.ID=id
