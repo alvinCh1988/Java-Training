@@ -10,19 +10,20 @@ Data Access Object(DAO) pattern Example & JDBC
 • mysql-connector: 8.0.13
 
 
+程式開啟前提醒:
+--
+
+請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classath
+
+確保您的 `source-file.txt` 路徑正確
+
+
 ### 在Day5專案 目錄中開啟 cmd 並輸入以下指令建立專案 ###
     mvn package
  
 ### BUILD SUCCESS 之後,依序下列指令開啟專案 ###
     cd target
     java -cp Day5-0.0.1-SNAPSHOT.jar idv.Day5.EmpDaoPattemDemo C:\source-file.txt
-
-程式開啟前注意:
---
-
-請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classath
-
-確保您的 `source-file.txt` 路徑正確
 
 ### 您可以針對 `source-file.txt` 內容進行修改 (以下為範例) ###
 
