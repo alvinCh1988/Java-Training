@@ -5,72 +5,41 @@ import java.util.*;
 
 public class ReadSourceFile {
 
-	StringBuilder sBuild = new StringBuilder();
-	private String information = "";
-	private String operateion = "";
-
+	private static Properties props;
+	
 	public Map<String, String> readFile(String path) {
 
-		try {
-			FileReader fr = new FileReader(path);
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			while ((line = br.readLine()) != null) {
-				sBuild.append(line);
-
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		information = sBuild.substring(sBuild.indexOf("#"), sBuild.lastIndexOf("#"));
-		operateion = sBuild.substring(sBuild.lastIndexOf("#"));
-
-		Map<String, String> map = new HashMap<String, String>();
-
-		map.put("ConnectionConnection", informationSubStr("ConnectionConnection"));
-		map.put("UserId", informationSubStr("User"));
-		map.put("Password", informationSubStr("Password"));
-		map.put("Action", operateionSubStr("Action"));
-		map.put("C.Data", operateionSubStr("C"));
-		map.put("R.ID", operateionSubStr("R"));
-		map.put("U.Data", operateionSubStr("U"));
-		map.put("D.ID", operateionSubStr("D"));
+		props = new Properties();
+        try {
+             props.load(new FileInputStream(path));
+        } catch (FileNotFoundException e) {
+             e.printStackTrace();
+        } catch (IOException e) {
+             e.printStackTrace();
+        }
+		
+        
+        Map<String, String> map = new HashMap<String, String>();
+        
+        map.put("ConnectionConnection", cusSubStr(props.getProperty("Connection.String")));
+        map.put("UserId", cusSubStr(props.getProperty("DB.User")));
+        map.put("Password", cusSubStr(props.getProperty("DB.Password")));
+        map.put("Action", props.getProperty("DB.Action"));
+        map.put("C.Data", props.getProperty("DB.C.Data"));
+        map.put("R.ID", props.getProperty("DB.R.ID"));
+        map.put("U.Data", props.getProperty("DB.U.Data"));
+        map.put("D.ID", props.getProperty("DB.D.ID"));
 
 		return map;
 	}
 
-	private String informationSubStr(String key) {
+	private String cusSubStr(String str) {
 
 		String capStr = "";
 
-		capStr = information.substring(information.indexOf("{", information.indexOf(key)) + 1,
-				information.indexOf("}", information.indexOf(key)));
+		capStr = str.substring(str.indexOf("{") + 1,str.indexOf("}"));
 
-//		System.out.println(capStr);
-
-		return capStr;
-	}
-
-	private String operateionSubStr(String key) {
-
-		String capStr = "";
-
-		if (key.equals("Action")) {
-			capStr = operateion.substring(operateion.indexOf("=", operateion.indexOf(key)) + 1,
-					operateion.indexOf("DB.", operateion.indexOf(key)));
-		}
-
-		if (key.equals("C") || key.equals("R") || key.equals("U")) {
-			key = key + ".";
-			capStr = operateion.substring(operateion.indexOf("=", operateion.indexOf(key)) + 1,
-					operateion.indexOf("DB.", operateion.indexOf(key)));
-		}
-
-		if (key.equals("D")) {
-			key = key + ".";
-			capStr = operateion.substring(operateion.indexOf("=", operateion.indexOf(key)) + 1);
-		}
+		System.out.println(capStr);
 
 		return capStr;
 	}

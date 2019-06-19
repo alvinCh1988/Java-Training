@@ -9,8 +9,7 @@ public class EmpDaoPattemDemo {
 	public static void main(String[] args) {
 
 		EmpDAO dao = new EmpDAO();
-		EmpDaoPattemDemo ptm = new EmpDaoPattemDemo();
-		ReadSourceFile rsf = new ReadSourceFile();
+		ReadSourceFile read = new ReadSourceFile();
 		Map<String, String> map = new HashMap<String, String>();
 
 		String path = "";
@@ -19,7 +18,7 @@ public class EmpDaoPattemDemo {
 			path = args[0];
 		}
 
-		map = rsf.readFile(path);
+		map = read.readFile(path);
 
 		String url = map.get("ConnectionConnection");
 		String userId = map.get("UserId");
@@ -100,7 +99,6 @@ public class EmpDaoPattemDemo {
 			
 		}
 
-		
 		if (action.equals("C") || action.equals("U") || action.equals("D")) {
 			
 			// QUERY ALL
