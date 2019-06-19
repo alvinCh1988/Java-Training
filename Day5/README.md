@@ -20,17 +20,17 @@ Data Access Object(DAO) pattern Example & JDBC
         `gender` VARCHAR(45) NULL,
         PRIMARY KEY (`id`)
      );
-    
-### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classpath
 
 <br>
 
 ### 在Day5專案 目錄中開啟 cmd 並輸入以下指令建立專案 ###
     mvn package
+    
+### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至 Day5/target中
  
 ### BUILD SUCCESS 之後,依序下列指令開啟專案 ###
     cd target
-    java -cp Day5-0.0.1-SNAPSHOT.jar idv.Day5.EmpDaoPattemDemo C:\source-file.txt
+    java -cp .\ idv.Day5.EmpDaoPattemDemo C:\source-file.txt
 
 ### 您可以對 `source-file.txt` 內容進行修改 (以下為範例) ###
 
