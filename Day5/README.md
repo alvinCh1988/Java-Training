@@ -19,9 +19,9 @@ Data Access Object(DAO) pattern Example & JDBC
         `name` VARCHAR(45) NULL,
         `gender` VARCHAR(45) NULL,
         PRIMARY KEY (`id`)
-        );
+     );
     
-### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classath
+### 請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的 Classpath
 
 <br>
 
