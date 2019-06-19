@@ -35,7 +35,7 @@ Data Access Object(DAO) pattern Example & JDBC
 ### 您可以對 `source-file.txt` 內容進行修改 (以下為範例) ###
 
     #Information of DataBase Connection
-    Connection.String=${jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true}
+    Connection.String=${jdbc:mysql://localhost:3306/testDB?serverTimezone=Asia/Shanghai&useSSL=true}
     DB.User=${root}
     DB.Password=${root}
 
