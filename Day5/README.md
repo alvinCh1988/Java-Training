@@ -14,7 +14,7 @@ Data Access Object(DAO) pattern Example & JDBC
 --
 
 ### 請於您的MySQL 新增一個 Table ###
-    CREATE TABLE `test`.`new_table` (
+    CREATE TABLE `testDB`.`day5` (
         `id` INT NOT NULL AUTO_INCREMENT,
         `name` VARCHAR(45) NULL,
         `gender` VARCHAR(45) NULL,
