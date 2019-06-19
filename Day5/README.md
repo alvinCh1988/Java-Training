@@ -41,6 +41,9 @@ Data Access Object(DAO) pattern Example & JDBC
 `DB.Action` 為您想進行的行為 C/R/U/D  請擇一
 
 C : 輸入資料並新增一筆資料
+
 R : 輸入ID並查詢一筆資料
+
 U : 輸入資料及ID並修改該筆ID資料
+
 D : 輸入ID刪除一筆資料
