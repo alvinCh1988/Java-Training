@@ -50,8 +50,7 @@ public class EmpDaoPattemDemo {
 			empVO1.setName(name);
 			empVO1.setGender(gender);
 			dao.insert(empVO1);
-			
-			ptm.queryAll();
+
 		}
 
 		if (action.equals("R")) {
@@ -91,7 +90,6 @@ public class EmpDaoPattemDemo {
 			empVO2.setId(id);
 			dao.update(empVO2);
 			
-			ptm.queryAll();
 		}
 
 		if (action.equals("D")) {
@@ -100,25 +98,22 @@ public class EmpDaoPattemDemo {
 			int id = Integer.valueOf(map.get("D.ID")).intValue();
 			dao.delete(id);
 			
-			ptm.queryAll();
 		}
 
 		
-
+		if (action.equals("C") || action.equals("U") || action.equals("D")) {
+			
+			// QUERY ALL
+			List<EmpVO> list = dao.getAll();
+			System.out.println("===================");
+			for (EmpVO a : list) {
+				System.out.print(" . " + a.getId() + " | ");
+				System.out.print(a.getName() + " | ");
+				System.out.print(a.getGender());
+				System.out.println();
+			}
+			System.out.println("===================");
+			
+		}
 	}
-	
-	private void queryAll() {
-		// QUERY ALL
-				EmpDAO dao = new EmpDAO();
-				List<EmpVO> list = dao.getAll();
-				System.out.println("=============");
-				for (EmpVO a : list) {
-					System.out.print(" . " + a.getId() + " | ");
-					System.out.print(a.getName() + " | ");
-					System.out.print(a.getGender());
-					System.out.println();
-				}
-				System.out.println("=============");
-	}
-
 }
