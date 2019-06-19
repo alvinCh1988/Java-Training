@@ -4,45 +4,26 @@ import java.io.*;
 import java.util.*;
 
 public class ReadSourceFile {
-	
-	public Map<String, String> readFile(String path) {
-		StringBuilder sBuild = new StringBuilder();
-		String str = "";
-		
-		try {
-		      FileReader fr = new FileReader(path);
-		      BufferedReader br =new BufferedReader(fr);
-		      String line;
-		      while ((line = br.readLine()) != null) {
-		        sBuild.append(line);
-			         
-		        }
-		      }
-		    catch (IOException e) {
-		    	e.printStackTrace();
-		    	}
-		str = sBuild.toString();
-		
-		Map<String, String> map = new HashMap<>();
-		
-		try {
-			if(str.indexOf("method=") != -1) {
-				int sIndex = str.lastIndexOf("method=");
-				String[] method = sBuild.substring(sIndex).split("method=");
-				String[] valList = sBuild.substring(0,sIndex).split("value-list=");
 
-				map.put("method", method[1]);
-				map.put("value-list", valList[1]);
-				
-			}
-		} catch (Exception e) {
+	private static Properties props;
+
+	public Map<String, String> readFile(String path) {
+
+		props = new Properties();
+		try {
+			props.load(new FileInputStream(path));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
+		Map<String, String> map = new HashMap<String, String>();
+
+		map.put("value-list", props.getProperty("value-list"));
+		map.put("method", props.getProperty("method"));
 
 		return map;
 	}
-
-
 
 }

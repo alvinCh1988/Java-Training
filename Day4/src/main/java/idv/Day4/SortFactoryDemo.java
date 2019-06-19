@@ -11,13 +11,12 @@ public class SortFactoryDemo {
 	Sort_interface sort = null;
 	Map<String, String> readVal = null;
 	
-	
+
 	String path = "";
-		
-	if(args[0] != null) {
-	   path = args[0];
+
+	if (args[0] != null) {
+		path = args[0];
 	}
-	
 	
 	readVal = rsf.readFile(path);
 	
@@ -29,15 +28,11 @@ public class SortFactoryDemo {
 	for(int i = 0; i<val.length; i++) {
 		valueList[i] = Integer.valueOf(val[i]).intValue();
 	}
-	
-			
 
-	
 	sort = sortfac.getSort(readVal.get("method"));
 	sort.sort(valueList);
 	
 	}
-	
-	
+
 	
 }
