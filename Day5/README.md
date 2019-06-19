@@ -1,21 +1,43 @@
-MergeSort & Bubble Sort
+Data Access Object(DAO) pattern Example & JDBC
 =================
 
-You need to have Maven and Java installed.
-Before compiling, you need to create a Maven project.
+支援版本
+• JAVA: 8+
+• Maven: 3.6.1
+• mysql-connector: 8.0.13
 
-### open cmd and cd to the current project directory and enter the following instructions in order to build Maven Project ###
+
+### 在Day5專案 目錄中開啟 cmd 並輸入以下指令建立專案 ###
     mvn package
  
-### When BUILD SUCCESS And type ###
+### BUILD SUCCESS 之後,依序下列指令開啟專案 ###
     cd target
-    java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt
+    java -cp Day5-0.0.1-SNAPSHOT.jar idv.Day5.EmpDaoPattemDemo C:\source-file.txt
+
+程式開啟前注意:
+請至 [這裡](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.13/source-code) 下載 mysql-connector-java-8.0.13.jar 放至您的Classath
+
+確保您的 `source-file.txt` 路徑正確
     
-Before executing, please make sure your`source-file.txt` file path
+### 您可以針對 `source-file.txt` 內容進行修改 (以下為範例) ###
 
-You can change the `method` status in source-file.txt
+    #Information of DataBase Connection
+    Connection.String=${jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true}
+    DB.User=${root}
+    DB.Password=${root}
 
-Ex: `merge` or `bubble`
+    #DataBase Operateion
+    DB.Action=C
+    DB.C.Data=JACK,male
+    DB.R.ID=1
+    DB.U.Data=4,SALA,female
+    DB.D.ID=3
+    
+請注意 `Connection.String=${jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true}` 輸入格式
 
-And you can change the value of `value-list =` in source-file.txt
+`DB.Action` 為您想進行的行為 C/R/U/D  請擇一
 
+C : 輸入資料並新增一筆資料
+R : 輸入ID並查詢一筆資料
+U : 輸入資料及ID並修改該筆ID資料
+D : 輸入ID刪除一筆資料
