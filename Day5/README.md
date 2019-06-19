@@ -2,8 +2,11 @@ Data Access Object(DAO) pattern Example & JDBC
 =================
 
 支援版本
+
 • JAVA: 8+
+
 • Maven: 3.6.1
+
 • mysql-connector: 8.0.13
 
 
