@@ -35,10 +35,9 @@ public class SortFactoryDemo {
 	@SuppressWarnings("resource")
 	ApplicationContext context = new ClassPathXmlApplicationContext("SortFactory.xml");
 	SortFactory sortFactory = (SortFactory) context.getBean("sortFactory");
+	sortFactory.setSortType((String) readVal.get("method"));
 	sortFactory.Sort((int[]) readVal.get("value-list"));
 
-	
-	
 	}
 
 }

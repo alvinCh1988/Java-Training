@@ -5,9 +5,6 @@ public class SortFactory {
 	private ISort sort = null;
 	private String sortType = null;
 	
-	SortFactory(String sortType){
-		this.sortType = sortType;
-	}
 	
 	public ISort getSort() {
 		return sort;
