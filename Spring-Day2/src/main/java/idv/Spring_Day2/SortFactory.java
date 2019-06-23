@@ -1,45 +1,45 @@
 package idv.Spring_Day2;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class SortFactory {
 	
 	private ISort sort = null;
-	private String sortType = null;
+	private String sortType = "";
+	private int[] valueList;
 	
 	
-	public ISort getSort() {
-		return sort;
-	}
-	public void setSort(ISort sort) {
-		this.sort = sort;
-	}
+	
 	public String getSortType() {
 		return sortType;
 	}
+	
 	public void setSortType(String sortType) {
 		this.sortType = sortType;
 	}
 	
-	public void Sort(int[] value) {
-		this.sort.sort(value);
+	public void setValueList(int[] valueList) {
+		this.valueList = valueList;
 	}
 	
 	
-//	public ISort getSort(String sortType) {
-//		
-//		if(sortType == null){
-//	         return null;
-//	      }		
-//		
-//	      if(sortType.equalsIgnoreCase("Bubble")){
-//	         return new BubbleSort();
-//	         
-//	      } else if(sortType.equalsIgnoreCase("Merge")){
-//	         return new MergeSort();
-//	         
-//	      }
-//	      
-//		return null;
-//
-//	}
+	public void sort() {
 
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("SortFactory.xml");
+		if(this.sortType.equals("Merge")) {
+			this.sort = (MergeSort) context.getBean("mergeSort");
+		}
+		
+		if(this.sortType.equals("bubble")) {
+			this.sort = (BubbleSort) context.getBean("bubbleSort");
+		}
+		
+		System.out.println("method: " + sortType);
+		
+		this.sort.sort(valueList);
+	}
+	
+	
 }

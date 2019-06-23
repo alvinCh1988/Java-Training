@@ -3,11 +3,14 @@ package idv.Spring_Day2;
 import java.io.*;
 import java.util.*;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class ReadSourceFile {
 
 	private static Properties props;
 
-	public Map<String, Object> readFile(String path) {
+	public void readFile(String path) {
 
 		props = new Properties();
 		try {
@@ -24,14 +27,15 @@ public class ReadSourceFile {
 		for(int i = 0; i<val.length; i++) {
 			valueList[i] = Integer.valueOf(val[i]).intValue();
 		}
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("value-list", valueList);
-		map.put("method", props.getProperty("method"));
 		
+		
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("SortFactory.xml");
+		SortFactory sortFactory = (SortFactory) context.getBean("sortFactory");
+		sortFactory.setSortType(props.getProperty("method"));
+		sortFactory.setValueList(valueList);
+		sortFactory.sort();
 
-		return map;
 	}
 
 }
