@@ -1,21 +1,24 @@
 package idv.Spring_Day2;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SortFactoryDemo {
 	
 
 	public static void main(String[] args) {
-	ReadSourceFile read = new ReadSourceFile();
-	
 
-	String path = "source-file.txt";
+	String path = "file:C:/eclipse-workspace/Spring-Day2/source-file.txt";
 
 //	if (args[0] != null) {
 //		path = args[0];
 //	}
 	
-	read.readFile(path);
-	
+	@SuppressWarnings("resource")
+	ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	ReadSourceFile sortFactory = (ReadSourceFile) context.getBean("readSource");
+	sortFactory.readFile(path);
+
 	}
 
 }

@@ -4,23 +4,33 @@ import java.io.*;
 import java.util.*;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
-public class ReadSourceFile {
+public class ReadSourceFile implements ResourceLoaderAware{
 
 	private static Properties props;
 
-	public void readFile(String path) {
-
+	private ResourceLoader resourceLoader;
+	
+	public void readFile(String path){
+		
 		props = new Properties();
+		Resource resource = resourceLoader.getResource(path);
+		
 		try {
-			props.load(new FileInputStream(path));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			InputStream in = resource.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			props.load(reader);
+
+        reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+        
+		String sortType = props.getProperty("method");
 		String[] val = props.getProperty("value-list").split(",");
 		int[] valueList = new int[val.length];
 		
@@ -28,14 +38,23 @@ public class ReadSourceFile {
 			valueList[i] = Integer.valueOf(val[i]).intValue();
 		}
 		
-		
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("SortFactory.xml");
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		SortFactory sortFactory = (SortFactory) context.getBean("sortFactory");
-		sortFactory.setSortType(props.getProperty("method"));
-		sortFactory.setValueList(valueList);
-		sortFactory.sort();
 
+		sortFactory.setValueList(valueList);
+		
+		if(!sortType.equals("")) {
+			System.out.println("method : " + sortType);
+			sortFactory.setSort((MergeSort) context.getBean(sortType));
+			sortFactory.sort();
+		}
+		
+
+	}
+
+	public void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;	
 	}
 
 }
