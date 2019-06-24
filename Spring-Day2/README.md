@@ -18,8 +18,8 @@ MergeSort & Bubble Sort by Spring
     cd target
     java -jar Spring-Day2-0.0.1-SNAPSHOT.jar file:C:/source-file.txt
     
-確保您的 source-file.txt 檔案路徑正確
+(確保您的 source-file.txt 檔案路徑正確)
 
 ### 您可以對 `source-file.txt` 內容進行修改 (以下為範例) ###
-    value-list=10,44,55,66,78,100,101,8897,10001 (請用 , 作為數字間隔)
+    value-list=10,44,55,66,78,100,101,8897,10001 (請用 ',' 作為數字間隔)
     method=merge or bubble
