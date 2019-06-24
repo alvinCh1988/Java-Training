@@ -8,11 +8,11 @@ public class SortFactoryDemo {
 
 	public static void main(String[] args) {
 
-	String path = "file:C:/eclipse-workspace/Spring-Day2/source-file.txt";
+	String path = "";
 
-//	if (args[0] != null) {
-//		path = args[0];
-//	}
+	if (args[0] != null) {
+		path = args[0];
+	}
 	
 	@SuppressWarnings("resource")
 	ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
