@@ -1,0 +1,7 @@
+spring:
+  mvc:
+    view:
+      # 頁面默認前綴目錄
+      prefix: /WEB-INF/jsp/
+      # 響應頁面默認後綴
+      suffix: .jsp
