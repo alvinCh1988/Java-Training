@@ -5,27 +5,28 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 
 public class AccountDAO implements IAccount{
 	
-//	"com.mysql.cj.jdbc.Driver"
+
 	String driver;
+	@Value("${spring.datasource.url}")
 	String url;
+	@Value("${spring.datasource.data-username}")
 	String userId;
+	@Value("${spring.datasource.data-password}")
 	String passwd;
+	Map<String, String> map;
 	
-	@Autowired
-	public void settingDB(String url, String userId, String passwd) {
 
-		this.url = url;
-		this.userId = userId;
-		this.passwd = passwd;
-
-	}
 	
-	private static final String INSERT_ACCOUNT = "INSERT INTO test1.account(firstName, lastName, account, password, imfPath) VALUE (?, ?, ?, ?, ?) ";
+	private static final String INSERT_ACCOUNT = "INSERT INTO test1.account(firstName, lastName, account, password, imgPath) VALUE (?, ?, ?, ?, ?)";
 	private static final String GET_ONE_STMT = "SELECT * FROM test1.account where (account=?)";
 	
 	@Override
@@ -56,16 +57,20 @@ public class AccountDAO implements IAccount{
 	}
 
 	@Override
-	public AccountVO findAccount(String account) {
+	public AccountVO getOne(String account) {
 		AccountVO accountVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		
 		try {
+			
+			map = new HashMap<String , String>();
 
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
+			
 
 			pstmt.setString(1, account);
 
@@ -76,20 +81,21 @@ public class AccountDAO implements IAccount{
 				accountVO.setFirstName(rs.getString("firstName"));
 				accountVO.setLastName(rs.getString("lastName"));
 				accountVO.setAccount(rs.getString("account"));
+				accountVO.setPassword(rs.getString("password"));
 				accountVO.setImgPath(rs.getString("imgPath"));
 			}
-
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
 			closeResource(con, pstmt, rs);
 		}
-		return null;
+		return accountVO;
 	}
 	
 	
-	
+//	關閉資源
 	public void closeResource(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		
 		if (pstmt != null) {

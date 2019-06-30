@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -14,21 +17,29 @@
       margin-left: 40%;
       margin-right: auto;
     }
+    
+     p {
+      color: red;
+    }
   </style>
 </head>
 
 <body>
+
+	
 
   <div class="main">
     <div id="loginForm" style="width:25%;">
       <form method="post" action="/getAccount">
         <div class="form-group">
           <label for="iptAccount">User Name</label>
-          <input type="text" class="form-control" name="account" id="iptAccount">
+          <input type="text" class="form-control" name="account" id="iptAccount" >
+          <p>${errorActMsg}</p>
         </div>
         <div class="form-group">
           <label for="iptPassword">Password</label>
           <input type="password" class="form-control" name="password" id="iptPassword">
+          <p>${errorPwdMsg}</p>
         </div>
 
         <button type="submit" class="btn btn-primary" style="float: right">Login</button>

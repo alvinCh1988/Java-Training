@@ -14,6 +14,7 @@
       margin-left: 35%;
       margin-right: auto;
     }
+
   </style>
 </head>
 

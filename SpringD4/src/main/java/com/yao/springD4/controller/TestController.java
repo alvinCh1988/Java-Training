@@ -1,23 +1,31 @@
 package com.yao.springD4.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yao.springD4.model.AccountDAO;
+import com.yao.springD4.model.AccountService;
 import com.yao.springD4.model.AccountVO;
+import com.yao.springD4.model.FileUtils;
 
 @Controller
 public class TestController {
+	
+	@Autowired
+	private AccountService accountSvc;
 
     @RequestMapping(value = { "/", "/login" })
     public String login() {
-        System.out.println("test!!!!!");
         return "login";
     }
 
@@ -26,49 +34,70 @@ public class TestController {
         return "register";
     }
 
-    @RequestMapping("/insert")
-    public String insert(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName,
-            @RequestParam("account") String account, @RequestParam("password") String password,
-            @RequestParam("file") MultipartFile file) {
+    @RequestMapping(method = RequestMethod.POST, value="/insert")
+    public String insert(
+    		@RequestParam("lastName") String lastName, 
+    		@RequestParam("firstName") String firstName,
+            @RequestParam("account") String account, 
+            @RequestParam("password") String password,
+            @RequestParam("file") MultipartFile file,
+            HttpServletRequest request,
+            Model model) {
+    	
+    	AccountVO accountVO = new AccountVO();
+    	accountVO.setAccount(account);
+    	accountVO.setFirstName(firstName);
+    	accountVO.setLastName(lastName);
+    	
 
-        System.out.println(lastName);
-        System.out.println(firstName);
-        System.out.println(account);
-        System.out.println(password);
-        System.out.println(file.getOriginalFilename());
-
-        File path = new File("C:/upload");
-        if (!path.exists())
-        path.mkdirs();
-
-        File covertFile = new File(path + file.getOriginalFilename());
+    	if(accountSvc.getOneAct(account) != null) {
+    		
+    		model.addAttribute("accountVO", accountVO);
+    		model.addAttribute("accountMsg", "帳號已註冊");
+    		return "register";
+    	}
+    	
+     // 要上傳的目標檔案存放路徑
+    	ServletContext servletContext = request.getServletContext();
+    	String fileName = file.getOriginalFilename();
+        String localPath = servletContext.getRealPath("/images_uploaded");
         
-        try {
-            covertFile.createNewFile();
-            FileOutputStream fout = new FileOutputStream(covertFile);
-            fout.write(file.getBytes());
-            fout.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // 上傳成功或者失敗的提示
+        String msg = "";
+        String imgPath = FileUtils.upload(file, localPath, fileName);
+        if (imgPath != null){
+        	accountSvc.addAct(lastName, firstName, account, password, imgPath);
+        	msg = "success";
+        	
+        } else {
+        	msg = "fail";
         }
-
-
-
-        return "login";
+        
+        model.addAttribute("status", msg);
+        return "register";
     }
 
     @RequestMapping("/getAccount")
-    public String getAccount(@RequestParam("account") String account,
-                             @RequestParam("password") String password,
-                             Map<String, Object> model) {
+    public String getAccount(
+    		@RequestParam("account") String account,
+    		@RequestParam("password") String password,              
+    		Map<String, String> model) {
     	
-    						AccountDAO accountDAO = new AccountDAO();
-    						AccountVO accountVO = new AccountVO();
-    						accountVO = accountDAO.findAccount(account);
+    	AccountVO actVO = new AccountVO();
+    	actVO = accountSvc.getOneAct(account);
 
-                                model.put("account", accountVO.getAccount());
+    	if(actVO == null) {
+    		model.put("errorActMsg", "查無此帳號");
+    		return "login";
+    	} else if (!actVO.getPassword().equals(password)) {
+    		model.put("errorPwdMsg", "密碼錯誤");
+    		return "login";
+    	}
+    	
+        model.put("account", actVO.getAccount());
 
         return "loginSuccess";
     }
+    
 
 }
