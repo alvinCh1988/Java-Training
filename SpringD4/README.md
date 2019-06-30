@@ -1,4 +1,4 @@
-# Spring MVC JSP NO JAP
+# Spring MVC  `JSP` `NO JPA`
 
 支援版本
 
