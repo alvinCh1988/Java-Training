@@ -6,6 +6,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yao.springD4.model.AccountDAO;
+import com.yao.springD4.TestConfiguration;
 import com.yao.springD4.model.AccountService;
 import com.yao.springD4.model.AccountVO;
 import com.yao.springD4.model.FileUtils;
 
+
 @Controller
 public class TestController {
+	
+	ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
 	
 	@Autowired
 	private AccountService accountSvc;
@@ -44,6 +49,7 @@ public class TestController {
             HttpServletRequest request,
             Model model) {
     	
+    	FileUtils fileUtils = context.getBean(FileUtils.class);
     	AccountVO accountVO = new AccountVO();
     	accountVO.setAccount(account);
     	accountVO.setFirstName(firstName);
@@ -64,7 +70,7 @@ public class TestController {
         
         // 上傳成功或者失敗的提示
         String msg = "";
-        String imgPath = FileUtils.upload(file, localPath, fileName);
+        String imgPath = fileUtils.upload(file, localPath, fileName);
         if (imgPath != null){
         	accountSvc.addAct(lastName, firstName, account, password, imgPath);
         	msg = "success";

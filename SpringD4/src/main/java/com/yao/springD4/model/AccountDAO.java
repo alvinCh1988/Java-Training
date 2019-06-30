@@ -22,9 +22,6 @@ public class AccountDAO implements IAccount{
 	String userId;
 	@Value("${spring.datasource.data-password}")
 	String passwd;
-	Map<String, String> map;
-	
-
 	
 	private static final String INSERT_ACCOUNT = "INSERT INTO test1.account(firstName, lastName, account, password, imgPath) VALUE (?, ?, ?, ?, ?)";
 	private static final String GET_ONE_STMT = "SELECT * FROM test1.account where (account=?)";
@@ -63,10 +60,7 @@ public class AccountDAO implements IAccount{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		
 		try {
-			
-			map = new HashMap<String , String>();
 
 			con = DriverManager.getConnection(url, userId, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);

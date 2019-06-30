@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.yao.springD4.model.AccountDAO;
 import com.yao.springD4.model.AccountService;
+import com.yao.springD4.model.FileUtils;
 
 @Configuration
 public class TestConfiguration {
@@ -17,6 +18,11 @@ public class TestConfiguration {
 	@Bean
 	public AccountDAO accountDAO() {
 		return new AccountDAO();
+	}
+	
+	@Bean
+	public FileUtils fileUtils() {
+		return new FileUtils();
 	}
 	
 

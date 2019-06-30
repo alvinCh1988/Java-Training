@@ -9,10 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUtils {
 	
 
-	public static String upload(MultipartFile file, String path, String fileName) {
+	public String upload(MultipartFile file, String path, String fileName) {
 
-		
-		String cusFileName = getUUID() + getSuffix(fileName);
+		FileUtils fileUtils = new FileUtils();
+		String cusFileName = fileUtils.getUUID() + fileUtils.getSuffix(fileName);
 		String realPath = path + "/" + cusFileName;
 		File dest = new File(realPath);
 		// 判斷目錄是否存在
@@ -37,12 +37,12 @@ public class FileUtils {
 	}
 
 //	取檔案格式 (.jgp)
-	public static String getSuffix(String fileName) {
+	public String getSuffix(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
 
 //	取UUID
-	public static String getUUID() {
+	public String getUUID() {
 		return UUID.randomUUID().toString().replace("-", "");
 	}
 
