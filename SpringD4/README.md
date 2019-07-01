@@ -11,8 +11,8 @@
 ### 請先在你的MySQL 新增一個TABLE ###
     CREATE TABLE `test1`.`account` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `account` VARCHAR(45) NOTNULL,
-    `password` VARCHAR(45) NOTNULL,
+    `account` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(45) NOT NULL,
     `lastName` VARCHAR(45) NULL,
     `firstName` VARCHAR(45) NULL,
     `imgPath` VARCHAR(45) NULL,
