@@ -17,6 +17,16 @@
     `firstName` VARCHAR(45) NULL,
     `imgPath` VARCHAR(45) NULL,
     PRIMARY KEY (`id`));
+    
+於 src\main\resources\application.yml
+更改你的 DB資料
+
+    spring:
+     datasource:
+        url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        data-username: root
+        data-password: root
 
 
 ### 專案下載後 目錄中開啟 cmd 並輸入以下指令建立WAR檔 ###
@@ -27,6 +37,9 @@ BUILD SUCCESS 之後
 部屬至您的 server
 
     C:\apache-tomcat-9.0.21\webapps
+    
+    
+    
     
 開啟server後
 於瀏覽器輸入
