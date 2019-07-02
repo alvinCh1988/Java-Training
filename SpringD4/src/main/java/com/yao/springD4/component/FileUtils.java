@@ -1,11 +1,13 @@
-package com.yao.springD4.model;
+package com.yao.springD4.component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component("FileUtils")
 public class FileUtils {
 	
 
@@ -35,7 +37,8 @@ public class FileUtils {
 		}
 
 	}
-
+	
+	
 //	取檔案格式 (.jgp)
 	public String getSuffix(String fileName) {
 		return fileName.substring(fileName.lastIndexOf("."));

@@ -1,27 +1,27 @@
-package com.yao.springD4.model;
+package com.yao.springD4.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
+import com.yao.springD4.model.AccountVO;
 
-public class AccountDAO implements IAccount{
+@Repository
+public class AccountDAO implements IAccountDAO{
 	
 
-	String driver;
 	@Value("${spring.datasource.url}")
 	String url;
 	@Value("${spring.datasource.data-username}")
 	String userId;
 	@Value("${spring.datasource.data-password}")
 	String passwd;
+	
 	
 	private static final String INSERT_ACCOUNT = "INSERT INTO test1.account(firstName, lastName, account, password, imgPath) VALUE (?, ?, ?, ?, ?)";
 	private static final String GET_ONE_STMT = "SELECT * FROM test1.account where (account=?)";
@@ -106,6 +106,16 @@ public class AccountDAO implements IAccount{
 				e.printStackTrace(System.err);
 			}
 		}
+		
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+		
+		
 	}
 
 }

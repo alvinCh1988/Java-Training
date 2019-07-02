@@ -6,8 +6,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yao.springD4.TestConfiguration;
-import com.yao.springD4.model.AccountService;
+import com.yao.springD4.component.FileUtils;
 import com.yao.springD4.model.AccountVO;
-import com.yao.springD4.model.FileUtils;
+import com.yao.springD4.service.IAccountImpl;
 
 
 @Controller
-public class TestController {
+public class AccountController {
 	
-	ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+//	這邊不確定要不要再改 ↓↓↓↓↓↓↓↓↓↓
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@Autowired
-	private AccountService accountSvc;
+	private IAccountImpl accountImpl;
 
     @RequestMapping(value = { "/", "/login" })
     public String login() {
@@ -49,34 +48,31 @@ public class TestController {
             HttpServletRequest request,
             Model model) {
     	
-    	FileUtils fileUtils = context.getBean(FileUtils.class);
+
     	AccountVO accountVO = new AccountVO();
     	accountVO.setAccount(account);
     	accountVO.setFirstName(firstName);
     	accountVO.setLastName(lastName);
     	
-
-    	if(accountSvc.getOneAct(account) != null) {
-    		
+//    	驗證帳號
+    	if(accountImpl.getOneAct(account) != null) {
     		model.addAttribute("accountVO", accountVO);
     		model.addAttribute("accountMsg", "帳號已註冊");
     		return "register";
     	}
     	
-     // 要上傳的目標檔案存放路徑
+    	
+//		要上傳的目標檔案存放路徑
     	ServletContext servletContext = request.getServletContext();
     	String fileName = file.getOriginalFilename();
         String localPath = servletContext.getRealPath("/images_uploaded");
         
-        // 上傳成功或者失敗的提示
+
         String msg = "";
         String imgPath = fileUtils.upload(file, localPath, fileName);
         if (imgPath != null){
-        	accountSvc.addAct(lastName, firstName, account, password, imgPath);
+        	accountImpl.addAct(lastName, firstName, account, password, imgPath);
         	msg = "success";
-        	
-        } else {
-        	msg = "fail";
         }
         
         model.addAttribute("status", msg);
@@ -90,7 +86,7 @@ public class TestController {
     		Map<String, String> model) {
     	
     	AccountVO actVO = new AccountVO();
-    	actVO = accountSvc.getOneAct(account);
+    	actVO = accountImpl.getOneAct(account);
 
     	if(actVO == null) {
     		model.put("errorActMsg", "查無此帳號");
