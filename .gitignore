@@ -18,7 +18,6 @@
 *.zip
 *.tar.gz
 *.rar
-*.md
 *.cmd
 *.project
 *.prefs
