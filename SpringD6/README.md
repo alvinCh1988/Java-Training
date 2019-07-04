@@ -24,7 +24,7 @@
     mvn compile war:war
 
 BUILD SUCCESS 之後
-至target 資料夾中 建立好的 springD4-0.0.1-SNAPSHOT.war
+至target 資料夾中 建立好的 springD6-0.0.1-SNAPSHOT.war
 部屬至您的 server
 
     C:\apache-tomcat-9.0.21\webapps
