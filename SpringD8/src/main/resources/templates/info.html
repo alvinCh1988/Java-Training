@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/cusStyle.css}">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-6">
+
+                <div class="card bg-light" th:object=${account}>
+
+                    <div class="card-header">
+
+                        <p class="card-title">
+                            <h3>
+
+                                <!-- th:text 顯示標籤 -->
+                                <span>帳號 : </span> &nbsp; <span th:text="*{accountName}"> </span>
+
+                            </h3>
+                        </p>
+
+                    </div>
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            <strong>
+                                <span>姓 : </span><span th:text="*{firstName}"> </span>
+                            </strong>
+                        </p>
+
+                        <p class="card-text">
+                            <strong>
+                                <span>名 : </span><span th:text="*{lastName}"> </span>
+                            </strong>
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <strong>
+                                <span>身份 : </span><span th:text="*{authGroup}"></span>
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+
+                <br>
+
+                <a class="btn btn-secondary btn-sm" href="javascript:history.go(-1)"> 返回 </a>
+
+            </div>
+
+            <div class="col-sm-6">
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
