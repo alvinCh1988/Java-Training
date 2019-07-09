@@ -1,4 +1,4 @@
-# Spring MVC `JPA` `JSP` 
+# Spring MVC `JPA` `thymeleaf` `Bootstrap`
 
 支援版本
 
@@ -6,7 +6,9 @@
 
 • Maven: 3
 
-• Spring: 2.6.1
+• Spring: 2.1.6
+
+• Bootstrap: 4
 
     
 於 src\main\resources\application.yml
