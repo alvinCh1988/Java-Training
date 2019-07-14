@@ -29,7 +29,7 @@
                 <div class="card bg-light">
                     <div class="card-body">
 
-                        <form enctype="multipart/form-data" method="put" th:object="${account}" th:action="@{/account/update}">
+                        <form enctype="multipart/form-data" method="post" th:object="${account}" th:action="@{/account/update}">
 
                             <input type="hidden" name="id" th:value="*{id}">
                             <div class="form-group">

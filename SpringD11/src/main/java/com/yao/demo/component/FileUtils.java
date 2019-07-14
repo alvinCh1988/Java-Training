@@ -8,7 +8,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component("FileUtils")
 public class FileUtils {
-
+	
+	
+	/**
+	 * 圖檔上傳
+	 * @param file
+	 * @param accountName
+	 * @return
+	 */
 	public String upload(MultipartFile file, String accountName) {
 
 		try {

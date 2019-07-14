@@ -16,8 +16,7 @@ public class ControllerExceptionHandler {
 	/**
 	 * 異常處理
 	 */
-	
-	private final Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@ExceptionHandler({Exception.class})
 	public ModelAndView handleException(HttpServletRequest req, Exception ex) throws Exception {

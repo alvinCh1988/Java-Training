@@ -94,7 +94,6 @@ public class AccountController {
 		Account account = accountSvc.findByAccountNameAndPassword(accountName, password);
 
 		if (account != null) {
-
 			if (account.getAuthGroup().equals("admin")) {
 				session.setAttribute("account", account);
 				return "redirect:/account/memberlist";
@@ -146,7 +145,7 @@ public class AccountController {
 	@GetMapping("/delete/{id}")
 	public String deleteOne(@PathVariable long id) {
 		accountSvc.delete(id);
-		return "redirect:/memberlist";
+		return "redirect:/account/memberlist";
 	}
 
 	/**
@@ -158,7 +157,7 @@ public class AccountController {
 	@PostMapping("/update")
 	public String update(Account account) {
 		accountSvc.save(account);
-		return "redirect:/memberlist";
+		return "redirect:/account/memberlist";
 	}
 
 	/**
