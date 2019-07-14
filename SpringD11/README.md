@@ -35,4 +35,4 @@ BUILD SUCCESS 之後
 開啟server後
 於瀏覽器輸入
 
-http://localhost:8080/login
+http://localhost:8080/account/
