@@ -1,4 +1,4 @@
-package com.yao.demo.form;
+package com.yao.demo.valid;
 
 public interface FormConvert<S,T> {
 

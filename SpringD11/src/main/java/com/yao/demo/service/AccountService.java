@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 import com.yao.demo.domain.Account;
 import com.yao.demo.domain.AccountRepository;
+import com.yao.exception.AccountNotFoundException;
 
 @Service("AccountService")
 public class AccountService{
@@ -26,12 +28,35 @@ public class AccountService{
 	}
 	
 	/**
-	 * 以帳號名稱以及密碼為條件取得一筆資料
+	 * 以帳號條件取得一筆資料
 	 * @param accountName
 	 * @param password
 	 * @return
 	 */
+	public Account findByAccountName(String accountName) {
+
+		Account account = accountRepository.findByAccountName(accountName);
+		if(account == null) {
+			throw new AccountNotFoundException();
+		}
+		return account;
+	}
+
+	/**
+	 * 檢查帳號是否使用
+	 */
+	public Boolean checkAccountNameUsed(String accountName){
+
+		Account account = accountRepository.findByAccountName(accountName);
+
+		if(account != null) {
+			return true;
+		}
+		return false;
+	}
+
 	public Account findByAccountNameAndPassword(String accountName, String password) {
+
 		return accountRepository.findByAccountNameAndPassword(accountName, password);
 	}
 

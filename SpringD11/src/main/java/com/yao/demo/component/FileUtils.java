@@ -1,8 +1,6 @@
 package com.yao.demo.component;
 
 import java.io.File;
-import java.io.IOException;
-
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
@@ -22,7 +20,6 @@ public class FileUtils {
 			 */
 			String myPath = "/images/uploadUsersPhote";
 			File uploadpath = new File(ResourceUtils.getURL("classpath:static").getPath(), myPath);
-			
 
 			/**
 			 * 取得檔案格式
@@ -50,16 +47,10 @@ public class FileUtils {
 
 			return rePath;
 
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-					return null;
-				} catch (IOException e) {
-					e.printStackTrace();
-					return null;
-				} catch (Exception e) {
-					e.printStackTrace();
-					return null;
-				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
 	}
 

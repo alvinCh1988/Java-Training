@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yao.demo.component.FileUtils;
 import com.yao.demo.domain.Account;
-import com.yao.demo.form.AccountForm;
 import com.yao.demo.service.AccountService;
+import com.yao.demo.valid.AccountForm;
 
 @Controller
 @RequestMapping("/account")
@@ -61,8 +65,8 @@ public class AccountController {
 	/**
 	 * 轉入登入頁面 (主畫面)
 	 */
-	@GetMapping({ "/", "/login" })
-	public String login() {
+	@GetMapping({ "/", "/index" })
+	public String loginPage() {
 
 		return "login";
 	}
@@ -71,8 +75,8 @@ public class AccountController {
 	 * 轉入新增資料頁面
 	 */
 	@GetMapping("/register")
-	public String register() {
-
+	public String register(Model model) {
+		model.addAttribute("accountForm", new AccountForm());
 		return "register";
 	}
 
@@ -83,21 +87,25 @@ public class AccountController {
 	 * @param password
 	 * @return
 	 */
-	@PostMapping("/getAccount")
-	public String getAccount(@RequestParam("accountName") String accountName,
-			@RequestParam("password") String password) {
+	@PostMapping("/login")
+	public String logingPost(@RequestParam("accountName") String accountName, @RequestParam("password") String password,
+			HttpSession session) {
 
 		Account account = accountSvc.findByAccountNameAndPassword(accountName, password);
 
 		if (account != null) {
 
 			if (account.getAuthGroup().equals("admin")) {
-				return "redirect:/memberlist";
-			} else {
-				return "login";
+				session.setAttribute("account", account);
+				return "redirect:/account/memberlist";
 			}
 		}
+		return "login";
+	}
 
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("account");
 		return "login";
 	}
 
@@ -108,9 +116,9 @@ public class AccountController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/info/{id}")
-	public String getAccount(@PathVariable long id, Model model) {
-		Account account = accountSvc.getOne(id);
+	@GetMapping("/info/{accountName}")
+	public String getAccount(@PathVariable String accountName, Model model) {
+		Account account = accountSvc.findByAccountName(accountName);
 		model.addAttribute("account", account);
 		return "info";
 	}
@@ -123,9 +131,9 @@ public class AccountController {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	@GetMapping("/update/{id}")
-	public String getAccountToUpdate(@PathVariable long id, Model model) throws FileNotFoundException {
-		Account account = accountSvc.getOne(id);
+	@GetMapping("/update/{accountName}")
+	public String getAccountToUpdate(@PathVariable String accountName, Model model) throws FileNotFoundException {
+		Account account = accountSvc.findByAccountName(accountName);
 		model.addAttribute("account", account);
 		return "update";
 	}
@@ -162,16 +170,34 @@ public class AccountController {
 	 * @return
 	 */
 	@PostMapping("/insert")
-	public String insert(@RequestParam("file") MultipartFile file, AccountForm accountForm, Model model) {
+	public String insert(@Valid AccountForm accountForm, BindingResult result, @RequestParam("file") MultipartFile file,
+			Model model) {
+
+		if (!accountForm.confirmPassword()) {
+			result.rejectValue("confirmPassword", "confirmError", "Two password inputs are different");
+		}
+
+		if (accountSvc.checkAccountNameUsed(accountForm.getAccountName()) == null) {
+			result.rejectValue("accountName", "confirmError", "Account Used");
+		}
+
+		if (result.hasErrors()) {
+			model.addAttribute("status", "fail");
+			return "register";
+		}
 
 		String fileName = fileUtils.upload(file, accountForm.getAccountName());
 		accountForm.setPhotoPath(fileName);
-
 		Account account = accountForm.ConvertToAccount();
+
 		accountSvc.save(account);
-//		model.addAttribute("status", "fail");
-//		model.addAttribute("status", "success");
+		model.addAttribute("status", "success");
 		return "register";
+	}
+
+	@GetMapping("/ex")
+	public String ex() {
+		throw new RuntimeException("this is error TEST!!");
 	}
 
 }

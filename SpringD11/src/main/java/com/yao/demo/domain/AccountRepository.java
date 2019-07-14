@@ -6,8 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<Account,Long>{
 	
+	Account findByAccountName(String accountName);
+
 	Account findByAccountNameAndPassword(String accountName, String password);
 	
 	Page<Account> findAll(Pageable pagealbe);
+
 
 }

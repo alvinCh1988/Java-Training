@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh-Hans">
 
 <head>
     <title>Document</title>
@@ -16,12 +16,15 @@
 
 <body>
 
+    <div class="container errorPage">
+        <div class="jumbotron">
+            <h1 class="display-4">Error</h1>
+            <p class="lead">404</p>
+            <hr class="my-4">
+            <p>你訪問的URL <code th:text="${#httpServletRequest.getAttribute('javax.servlet.error.request_uri')}"></code> 不存在</p>
+        </div>
+    </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 
 </html>
