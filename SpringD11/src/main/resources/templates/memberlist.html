@@ -16,10 +16,10 @@
 
 <body onload="ShowTime()">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <span class="navbar-brand" th:text="${session.account.firstName}"></span>
         <span class="navbar-brand" th:text="${session.account.lastName}"></span>
-        <span>你好!</span>
+        <span><strong style="color: white">你好!</strong></span>
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
@@ -27,6 +27,11 @@
                 <span class="navbar-text" id="showTimeDiv"></span>
             </li>
         </ul>
+        <span class="form-inline">
+            <span class="navbar-brand">您目前身份為 :</span>
+            <span class="navbar-brand" th:text="${session.account.authGroup}"></span>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <span class="form-inline">
             <a class="btn btn-outline-warning" th:href="@{/account/logout}">登出</a>
         </span>
@@ -60,11 +65,13 @@
                     <td th:text="${act.photoPath}"></td>
                     <td th:text="${act.authGroup}"></td>
                     <td style="max-width: 120px;">
-                        <a class="btn btn-danger btn-sm" onclick="javascript:return confirmDel()"
-                            th:href="@{/account/delete/{id}(id=${act.id})}">Delete</a>
+                        <a class="btn btn-primary btn-sm"
+                            th:href="@{/account/update/{name}(name=${act.accountName})}">Update</a>
 
-                        <a class="btn btn-primary btn-sm" th:href="@{/account/update/{name}(name=${act.accountName})}"
-                            style="float: right">Update</a>
+                        <a class="btn btn-danger btn-sm" onclick="javascript:return confirmDel()"
+                            th:if="${session.account.authGroup} == 'admin'"
+                            th:href="@{/account/delete/{id}(id=${act.id})}" style="float: right">Delete</a>
+
                     </td>
                 </tr>
             </tbody>

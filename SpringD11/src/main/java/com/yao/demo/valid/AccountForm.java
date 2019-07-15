@@ -11,19 +11,17 @@ import com.yao.demo.domain.Account;
 public class AccountForm {
 
 	private final String PSW_REG = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$";
-	private final String FILTER = "[^'\"{}\\[\\]\\\\//s!@#$%^&*()-+=_]*";
-	private final String NOTBLANK = "不得為空白"; 
-	private final String NO_SYMBOLS = "不得有特殊符號";
+	private final String FILTER = "^[A-Za-z0-9\\u4e00-\\u9fa5]+$";
+	private final String NO_SYMBOLS = "不能為空白 或 輸入特殊符號";
 
-	@NotBlank(message = NOTBLANK)
+	private long id;
+
 	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	private String accountName;
 
-	@NotBlank(message = NOTBLANK)
 	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	private String firstName;
 
-	@NotBlank(message = NOTBLANK)
 	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	private String lastName;
 
@@ -31,7 +29,7 @@ public class AccountForm {
 	@Pattern(regexp = PSW_REG)
 	private String password;
 
-	@NotBlank(message = NOTBLANK)
+	@NotBlank(message = NO_SYMBOLS)
 	private String confirmPassword;
 
 	private String photoPath;
@@ -40,6 +38,14 @@ public class AccountForm {
 
 	public AccountForm() {
 
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getAccountName() {
@@ -98,14 +104,13 @@ public class AccountForm {
 		this.authGroup = authGroup;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "AccountForm [accountName=" + accountName + ", firstName=" + firstName + ", lastName=" + lastName
-		+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", photoPath=" + photoPath
-		+ ", authGroup=" + authGroup + "]";
+				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", photoPath=" + photoPath
+				+ ", authGroup=" + authGroup + "]";
 	}
-	
+
 	public Account ConvertToAccount() {
 		Account account = new AccountFormConvert().convert(this);
 		return account;

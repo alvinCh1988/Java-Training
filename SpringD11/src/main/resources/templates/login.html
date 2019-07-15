@@ -30,6 +30,15 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="float: right">Login</button>
+                
+                <br>
+
+                <div th:switch="*{status}">
+                    <p class="text-danger" th:case="ACT_ERROR">帳號輸入錯誤</p>
+                    <p class="text-danger" th:case="PSW_ERROR">密碼輸入錯誤</p>
+                    <p class="text-danger" th:case="UNAUTH">您的權限不足，請洽詢管理員提升權限</p>
+                </div>
+                
 
             </form>
             <a th:href="@{/account/register}">註冊</a>

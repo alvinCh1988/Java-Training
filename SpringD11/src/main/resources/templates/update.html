@@ -29,7 +29,8 @@
                 <div class="card bg-light">
                     <div class="card-body">
 
-                        <form enctype="multipart/form-data" method="post" th:object="${account}" th:action="@{/account/update}">
+                        <form enctype="multipart/form-data" method="post" th:object="${account}"
+                            th:action="@{/account/update}">
 
                             <input type="hidden" name="id" th:value="*{id}">
                             <div class="form-group">
@@ -48,19 +49,32 @@
                                 <label for="iptFirstName">姓</label>
                                 <input type="text" class="form-control" id="iptFirstName" name="firstName"
                                     th:value="*{firstName}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">不得為空白&特殊符號</p>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="iptLastName">名</label>
-                                <input type="text" class="form-control" id="iptLastName" name="lastName"
-                                    th:value="*{lastName}">
+                                <input type="text" class="form-control" id="iptLastName" name="lastName" th:value="*{lastName}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">不得為空白&特殊符號</p>
                             </div>
 
                             <div class="form-group">
                                     <label for="iptPhotoPath">Photo</label>
                                     <input type="text" class="form-control" id="iptPhotoPath" name="photoPath"
                                     th:value="*{photoPath}" readonly>
+                            </div>
+
+                            <div class="form-group" th:if="${session.account.authGroup} == 'admin' ">
+                                <div class="form-group">
+                                    <label for="my-select">身份</label>
+                                    <select id="my-select" class="form-control" name="authGroup">
+                                        <option th:selected="(*{authGroup} == 'admin')">admin</option>
+                                        <option th:selected="(*{authGroup} == 'general')">general</option>
+                                        <option th:selected="(*{authGroup} == null)">訪客</option>
+                                    </select>
                                 </div>
+                            </div>
+                            
 
                             <br>
 

@@ -2,6 +2,7 @@ package com.yao.demo.controller;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -89,16 +90,18 @@ public class AccountController {
 	 */
 	@PostMapping("/login")
 	public String logingPost(@RequestParam("accountName") String accountName, @RequestParam("password") String password,
-			HttpSession session) {
+			HttpSession session, Model model) {
 
-		Account account = accountSvc.findByAccountNameAndPassword(accountName, password);
+		Map<String, Object> map = accountSvc.findByAccountNameAndPassword(accountName, password);
 
-		if (account != null) {
-			if (account.getAuthGroup().equals("admin")) {
-				session.setAttribute("account", account);
-				return "redirect:/account/memberlist";
-			}
+		String status = map.get("status").toString();
+
+		if (status.equals("SUCCESS")) {
+			session.setAttribute("account", map.get("account"));
+			return "redirect:/account/memberlist";
 		}
+		model.addAttribute("status", status);
+
 		return "login";
 	}
 
@@ -133,6 +136,7 @@ public class AccountController {
 	@GetMapping("/update/{accountName}")
 	public String getAccountToUpdate(@PathVariable String accountName, Model model) throws FileNotFoundException {
 		Account account = accountSvc.findByAccountName(accountName);
+		
 		model.addAttribute("account", account);
 		return "update";
 	}
@@ -155,7 +159,12 @@ public class AccountController {
 	 * @return
 	 */
 	@PostMapping("/update")
-	public String update(Account account) {
+	public String update(@Valid Account account, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			return "update";
+		}
+		
 		accountSvc.save(account);
 		return "redirect:/account/memberlist";
 	}
@@ -176,7 +185,7 @@ public class AccountController {
 			result.rejectValue("confirmPassword", "confirmError", "Two password inputs are different");
 		}
 
-		if (accountSvc.checkAccountNameUsed(accountForm.getAccountName()) == null) {
+		if (accountSvc.checkAccountNameUsed(accountForm.getAccountName())) {
 			result.rejectValue("accountName", "confirmError", "Account Used");
 		}
 
@@ -193,10 +202,4 @@ public class AccountController {
 		model.addAttribute("status", "success");
 		return "register";
 	}
-
-	@GetMapping("/ex")
-	public String ex() {
-		throw new RuntimeException("this is error TEST!!");
-	}
-
 }

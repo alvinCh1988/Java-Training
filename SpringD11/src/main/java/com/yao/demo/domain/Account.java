@@ -6,10 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "tbl_account")
 public class Account {
+	
+	private final String FILTER = "^[A-Za-z0-9\\u4e00-\\u9fa5]+$";
+	private final String NO_SYMBOLS = "不能為空白 或 輸入特殊符號";
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +23,11 @@ public class Account {
 	@Column(name="accountname")
 	private String accountName;
 	
+	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	@Column(name="firstname")
 	private String firstName;
 	
+	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	@Column(name="lastname")
 	private String lastName;
 	
