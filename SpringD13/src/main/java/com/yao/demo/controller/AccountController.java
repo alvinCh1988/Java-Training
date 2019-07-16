@@ -199,6 +199,11 @@ public class AccountController {
 
 		String fileName = fileUtils.upload(file, accountForm.getAccountName());
 		accountForm.setPhotoPath(fileName);
+		
+		if(accountForm.getAccountName().equals("admin")) {
+			accountForm.setAuthGroup("admin");
+		}
+		
 		Account account = accountForm.ConvertToAccount();
 
 		accountSvc.save(account);
