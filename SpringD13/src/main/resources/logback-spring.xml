@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+     <appender name="consoleApp" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="fileErrorApp" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%msg%n
+            </pattern>
+        </encoder>
+        <!-- 設定滾動策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 路徑 -->
+            <fileNamePattern>${LOG_FILE}-%d{yyyy-MM-dd}.log.%i</fileNamePattern>
+            
+			 <!-- 檔案保留日期 -->
+             <maxHistory>30</maxHistory>
+             
+             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            
+        </rollingPolicy>
+    </appender>
+    
+   <root level="DEBUG">  
+        <appender-ref ref="consoleApp"/>
+        <appender-ref ref="fileErrorApp"/>
+    </root>
+</configuration>

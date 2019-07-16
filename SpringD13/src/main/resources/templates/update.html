@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <title>更新資料</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/cusStyle.css}">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+
+            </div>
+
+            <div class="col-sm-4">
+
+
+                <div class="card bg-light">
+                    <div class="card-body">
+
+                        <form enctype="multipart/form-data" method="post" th:object="${account}"
+                            th:action="@{/account/update}">
+
+                            <input type="hidden" name="id" th:value="*{id}">
+                            <div class="form-group">
+                                <label for="iptAccount">Account Name</label>
+                                <input type="text" class="form-control" id="iptAccount" name="accountName"
+                                    th:value="*{accountName}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="iptPassword">Password</label>
+                                <input type="password" class="form-control" id="iptPassword" name="password"
+                                    th:value="*{password}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="iptFirstName">姓</label>
+                                <input type="text" class="form-control" id="iptFirstName" name="firstName"
+                                    th:value="*{firstName}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">不得為空白&特殊符號</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="iptLastName">名</label>
+                                <input type="text" class="form-control" id="iptLastName" name="lastName" th:value="*{lastName}">
+                                <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">不得為空白&特殊符號</p>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="iptPhotoPath">Photo</label>
+                                    <input type="text" class="form-control" id="iptPhotoPath" name="photoPath"
+                                    th:value="*{photoPath}" readonly>
+                            </div>
+
+                            <div class="form-group" th:if="${session.account.authGroup} == 'admin' ">
+                                <div class="form-group">
+                                    <label for="my-select">身份</label>
+                                    <select id="my-select" class="form-control" name="authGroup">
+                                        <option th:selected="(*{authGroup} == 'admin')">admin</option>
+                                        <option th:selected="(*{authGroup} == 'general')">general</option>
+                                        <option th:selected="(*{authGroup} == null)">訪客</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+
+                            <br>
+
+                            <p class="text-center">
+
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    onclick="javascript:return confirmUpdate()">註冊</button>
+
+                            </p>
+
+                        </form>
+
+                    </div>
+                </div>
+                <br>
+
+            </div>
+            
+            <div class="col-sm-6">
+                <div style="width: 185px; height: 185px; border-style: dashed; border-color: black">
+                    <img th:src="@{${account.photoPath}}" style="max-width: 180px; max-height: 180px; " id="preview_progressbar_img" />
+                </div>
+                <br>
+                <a class="btn btn-secondary btn-sm" href="javascript:history.go(-1)"> 返回 </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+        function confirmUpdate() {
+
+            if (window.confirm("確認更新?")) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>

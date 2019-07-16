@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/cusStyle.css}">
+</head>
+
+<body onload="ShowTime()">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <span class="navbar-brand" th:text="${session.account.firstName}"></span>
+        <span class="navbar-brand" th:text="${session.account.lastName}"></span>
+        <span><strong style="color: white">你好!</strong></span>
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <span class="navbar-text">&nbsp;&nbsp;&nbsp;&nbsp;現在時間 : </span>
+                <span class="navbar-text" id="showTimeDiv"></span>
+            </li>
+        </ul>
+        <span class="form-inline">
+            <span class="navbar-brand">您目前身份為 :</span>
+            <span class="navbar-brand" th:text="${session.account.authGroup}"></span>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="form-inline">
+            <a class="btn btn-outline-warning" th:href="@{/account/logout}">登出</a>
+        </span>
+
+    </nav>
+    <div class="container">
+        <h2>帳戶清單</h2>
+        <br>
+        <table class="table table-bordered table-sm table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>FIRST NAME</th>
+                    <th>Last NAME</th>
+                    <th>ACCOUT NAME</th>
+                    <th>PHOTO PATH</th>
+                    <th>AUTH GROUP</th>
+                    <th>OPERATE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="act:${page.content}">
+                    <td th:text="${act.id}"></td>
+                    <td th:text="${act.firstName}"></td>
+                    <td th:text="${act.lastName}"></td>
+                    <!-- 方法一 -->
+                    <td><a th:text="${act.accountName}" th:href="@{/account/info/{name}(name=${act.accountName})}"></a>
+                    </td>
+                    <!-- 方法二 -->
+                    <!-- <td><a th:text="${act.accountName}" th:href="@{'/info/' + ${act.id}}"></a></td> -->
+                    <td th:text="${act.photoPath}"></td>
+                    <td th:text="${act.authGroup}"></td>
+                    <td style="max-width: 120px;">
+                        <a class="btn btn-primary btn-sm"
+                            th:href="@{/account/update/{name}(name=${act.accountName})}">Update</a>
+
+                        <a class="btn btn-danger btn-sm" onclick="javascript:return confirmDel()"
+                            th:if="${session.account.authGroup} == 'admin'"
+                            th:href="@{/account/delete/{id}(id=${act.id})}" style="float: right">Delete</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" th:href="@{'/account/memberlist?page=' + ${page.number-1}}"
+                        th:unless="${page.first}">
+                        << </a> </li> <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                            <a class="page-link" th:href="@{|/account/memberlist?page=${pageNumber-1}|}"
+                                th:text=${pageNumber}></a>
+                </li>
+
+
+                <li class="page-item"><a class="page-link" th:href="@{'/account/memberlist?page=' + ${page.number+1}}"
+                        th:unless="${page.last}"> >> </a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+        function confirmDel() {
+            if (confirm("確認要刪除嗎？") == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        var showTimeDiv = document.getElementById('showTimeDiv');
+
+        function ShowTime() {
+            showTimeDiv.innerHTML = new Date();
+            setTimeout('ShowTime()', 1000);
+        }
+    </script>
+</body>
+
+</html>
