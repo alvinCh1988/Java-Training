@@ -11,15 +11,21 @@
 • Bootstrap: 4
 
     
-於 src\main\resources\application.yml
+src\main\resources\application.yml
 更改你的 DB資料
 
     spring:
      datasource:
         url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true
-        driver-class-name: com.mysql.cj.jdbc.Driver
         username: root
         password: root
+       
+log等級 & log文件輸出路徑
+      logging:
+        level:
+        root: error
+        com.yao.demo: warn
+        file: spring-boot-logger/island-training
 
 
 ### 專案下載後 目錄中開啟 cmd 並輸入以下指令建立WAR檔 ###
@@ -36,3 +42,10 @@ BUILD SUCCESS 之後
 於瀏覽器輸入
 
 http://localhost:8080/account/
+
+於第一次開啟專案後
+可以在註冊時
+Account Name 名稱 打上 admin
+即可新增一個 管理員 等級的帳號
+
+
