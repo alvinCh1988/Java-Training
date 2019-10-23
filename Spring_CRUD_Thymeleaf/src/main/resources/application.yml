@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useSSL=true
+    url: jdbc:mysql://localhost:3306/test_schema1?serverTimezone=Asia/Shanghai&useSSL=true
     username: root
     password: root
     

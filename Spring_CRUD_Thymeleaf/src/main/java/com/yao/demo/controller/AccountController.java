@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yao.demo.component.FileUtils;
-import com.yao.demo.domain.Account;
+import com.yao.demo.model.Account;
 import com.yao.demo.service.AccountService;
 import com.yao.demo.valid.AccountForm;
 

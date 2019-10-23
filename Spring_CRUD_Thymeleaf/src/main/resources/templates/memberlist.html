@@ -17,8 +17,7 @@
 <body onload="ShowTime()">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <span class="navbar-brand" th:text="${session.account.firstName}"></span>
-        <span class="navbar-brand" th:text="${session.account.lastName}"></span>
+        <span class="navbar-brand" th:text="${session.account.accountName}"></span>
         <span><strong style="color: white">你好!</strong></span>
         <ul class="navbar-nav mr-auto">
 
@@ -44,8 +43,6 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>FIRST NAME</th>
-                    <th>Last NAME</th>
                     <th>ACCOUT NAME</th>
                     <th>PHOTO PATH</th>
                     <th>AUTH GROUP</th>
@@ -55,8 +52,6 @@
             <tbody>
                 <tr th:each="act:${page.content}">
                     <td th:text="${act.id}"></td>
-                    <td th:text="${act.firstName}"></td>
-                    <td th:text="${act.lastName}"></td>
                     <!-- 方法一 -->
                     <td><a th:text="${act.accountName}" th:href="@{/account/info/{name}(name=${act.accountName})}"></a>
                     </td>

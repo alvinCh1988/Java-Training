@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.yao.demo.domain.Account;
-import com.yao.demo.domain.AccountRepository;
 import com.yao.demo.exception.AccountNotFoundException;
+import com.yao.demo.model.Account;
+import com.yao.demo.repository.AccountRepository;
 
 @Service("AccountService")
 public class AccountService {

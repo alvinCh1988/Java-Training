@@ -1,4 +1,4 @@
-package com.yao.demo.domain;
+package com.yao.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,15 +18,7 @@ public class Account {
 	
 	@Column(name="accountname")
 	private String accountName;
-	
-	@Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5]+$", message = "不能為空白 或 輸入特殊符號")
-	@Column(name="firstname")
-	private String firstName;
-	
-	@Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5]+$", message = "不能為空白 或 輸入特殊符號")
-	@Column(name="lastname")
-	private String lastName;
-	
+		
 	@Column(name="password")
 	private String password;
 	
@@ -53,22 +45,6 @@ public class Account {
 
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getPassword() {

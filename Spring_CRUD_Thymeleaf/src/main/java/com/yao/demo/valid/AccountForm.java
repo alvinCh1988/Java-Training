@@ -6,11 +6,11 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
-import com.yao.demo.domain.Account;
+import com.yao.demo.model.Account;
 
 public class AccountForm {
 
-	private final String PSW_REG = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$";
+	private final String PSW_REG = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$"; // 至少8-20 英文數字混合 至少要有大寫 密碼
 	private final String FILTER = "^[A-Za-z0-9\\u4e00-\\u9fa5]+$";
 	private final String NO_SYMBOLS = "不能為空白 或 輸入特殊符號";
 
@@ -19,14 +19,8 @@ public class AccountForm {
 	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
 	private String accountName;
 
-	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
-	private String firstName;
-
-	@Pattern(regexp = FILTER, message = NO_SYMBOLS)
-	private String lastName;
-
-	@Length(min = 8)
-	@Pattern(regexp = PSW_REG)
+	@NotBlank(message = NO_SYMBOLS)
+//	@Pattern(regexp = PSW_REG)
 	private String password;
 
 	@NotBlank(message = NO_SYMBOLS)
@@ -54,22 +48,6 @@ public class AccountForm {
 
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -106,7 +84,7 @@ public class AccountForm {
 
 	@Override
 	public String toString() {
-		return "AccountForm [accountName=" + accountName + ", firstName=" + firstName + ", lastName=" + lastName
+		return "AccountForm [accountName=" + accountName
 				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", photoPath=" + photoPath
 				+ ", authGroup=" + authGroup + "]";
 	}
