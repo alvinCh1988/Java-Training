@@ -1,4 +1,4 @@
-# Spring MVC `JPA` `JSP` 
+# Spring MVC `JSP` 
 
 支援版本
 
@@ -9,8 +9,7 @@
 • Spring: 2.6.1
 
     
-於 src\main\resources\application.yml
-更改你的 DB資料
+application
 
     spring:
      datasource:
@@ -18,19 +17,5 @@
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: root
         password: root
-
-
-### 專案下載後 目錄中開啟 cmd 並輸入以下指令建立WAR檔 ###
-    mvn compile war:war
-
-BUILD SUCCESS 之後
-至target 資料夾中 建立好的 springD6-0.0.1-SNAPSHOT.war
-部屬至您的 server
-
-    C:\apache-tomcat-9.0.21\webapps
-    
-    
-開啟server後
-於瀏覽器輸入
 
 http://localhost:8080/login
