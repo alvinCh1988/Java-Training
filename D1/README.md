@@ -4,7 +4,7 @@ Please Click "run.bat"
 
 or
 --------------------------
-cmd -> cd Training1\Day2
+cmd -> cd Training1\D1
 
 javac work.java
 
