@@ -1,4 +1,4 @@
-# Spring MVC `JPA` `thymeleaf` `AOP` `logback`
+# Spring MVC `thymeleaf`
 
 支援版本
 
