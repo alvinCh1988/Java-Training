@@ -9,7 +9,7 @@ Before compiling, you need to create a Maven project.
  
 ### When BUILD SUCCESS And type ###
     cd target
-    java -cp Day4-1.0-SNAPSHOT.jar idv.Day4.SortFactoryDemo C:\source-file.txt
+    java -cp Sort-1.0-SNAPSHOT.jar idv.Sort.SortFactoryDemo C:\source-file.txt
     
 Before executing, please make sure your`source-file.txt` file path
 
